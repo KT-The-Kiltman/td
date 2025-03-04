@@ -3,18 +3,20 @@ class Tower {
         this.type = type;
         this.x = x;
         this.y = y;
-        this.level = window.game.upgrades[`${type.toLowerCase()}Level`] || 1;
-        const baseStats = {
-            'Laser Turret': { damage: 5, range: 100, speed: 500, cost: 20 },
-            'Plasma Cannon': { damage: 20, range: 80, speed: 1000, cost: 50 },
-            'EMP Disruptor': { damage: 2, range: 120, speed: 800, cost: 30 }
-        }[type];
-        this.damage = baseStats.damage * (1 + 0.1 * window.game.upgrades.towerDamage);
-        this.range = baseStats.range + window.game.upgrades.towerRange * cellSize;
-        this.attackSpeed = baseStats.speed / (1 + 0.2 * window.game.upgrades.towerSpeed);
-        this.cost = baseStats.cost;
-        this.lastAttack = 0;
+        this.damage = 10; // Adjust base stats as needed
+        this.range = 100;
+        this.attackSpeed = 1000;
+
+        if (window.game.gameMode === 'defender') {
+            this.level = window.game.upgrades[`${type.toLowerCase()}Level`] || 1;
+            this.damage *= (1 + 0.1 * (window.game.upgrades.towerDamage || 0));
+            this.range += (window.game.upgrades.towerRange || 0) * cellSize;
+            this.attackSpeed /= (1 + 0.2 * (window.game.upgrades.towerSpeed || 0));
+        } else {
+            this.level = 1;
+        }
     }
+
 
     // Attack enemies within range
     attack(deltaTime) {
