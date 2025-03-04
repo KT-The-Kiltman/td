@@ -1,3 +1,21 @@
+const defaultUpgrades = {
+    towerDamage: 0,
+    towerRange: 0,
+    towerSpeed: 0,
+    unitDamage: 0,
+    unitSpeed: 0,
+    unitRange: 0,
+    'laser turretLevel': 1, // Keep if per-type levels are intended
+    'plasma cannonLevel': 1,
+    'emp disruptorLevel': 1,
+    'droneLevel': 1,
+    'mechLevel': 1,
+    'stealth botLevel': 1
+};
+
+const storedUpgrades = JSON.parse(localStorage.getItem('upgrades')) || {};
+window.game.upgrades = { ...defaultUpgrades, ...storedUpgrades };
+
 window.game.upgrades = JSON.parse(localStorage.getItem('upgrades')) || {
     towerDamage: 0,
     towerRange: 0,
