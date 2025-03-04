@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Defense: Rebellion</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            font-family: 'Orbitron', sans-serif;
+            color: #0ff;
+        }
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        #game-canvas {
+            background: transparent;
+        }
+        #title-screen, #game-ui, #upgrade-menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #0ff;
+            box-shadow: 0 0 15px #0ff;
+        }
+        #game-ui {
+            background: transparent;
+            pointer-events: none;
+        }
+        #top-bar {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            pointer-events: auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border: 1px solid #0ff;
+            box-shadow: 0 0 10px #0ff;
+        }
+        #selection-bar {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: auto;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            background: #000;
+            border: 2px solid #0ff;
+            box-shadow: 0 0 10px #0ff;
+            color: #0ff;
+            padding: 15px 25px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+        }
+        button:hover {
+            box-shadow: 0 0 20px #0ff;
+            transform: scale(1.05);
+        }
+        #upgrade-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            #top-bar {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="title-screen">
+            <h1>Cyber Defense: Rebellion</h1>
+            <button id="play-defender">Play as Hacker</button>
+            <button id="play-attacker">Play as Corporation</button>
+            <button id="reset-game">Reset Game</button>
+        </div>
+        <div id="game-ui" style="display: none;">
+            <div id="top-bar">
+                <span id="currency"></span> | 
+                <span id="health"></span> | 
+                <span id="wave-level"></span> | 
+                <span id="points"></span>
+            </div>
+            <div id="selection-bar"></div>
+            <button id="upgrade-button">Upgrades</button>
+        </div>
+        <div id="upgrade-menu" style="display: none;">
+            <h2>Upgrades</h2>
+            <div id="upgrade-options"></div>
+            <button id="close-upgrade">Close</button>
+        </div>
+    </div>
+    <script src="src/classes.js"></script>
+    <script src="src/canvas.js"></script>
+    <script src="src/gameLogic.js"></script>
+    <script src="src/input.js"></script>
+    <script src="src/upgrades.js"></script>
+    <script src="src/events.js"></script>
+</body>
+</html>
